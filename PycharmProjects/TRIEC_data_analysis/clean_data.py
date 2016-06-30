@@ -4,7 +4,7 @@ This program is to clean the data for dataset - mentees
 import csv
 
 
-""" These three functions help solve: Who gets matched and who doesn't"""
+""" Code below help solve: Who gets matched and who doesn't"""
 
 data_out = open("mentees_all_attributes.csv", "rU")
 reader = csv.reader(data_out)
@@ -50,7 +50,7 @@ counter_g = generalNumber() #creates general number of mentees/primary occupatio
 success_percentage = dict((k, counter_p[k] / float(counter_g[k])) for k in counter_p if k in counter_g) #calculates participants/general, returns dict
 no_success_percentage = dict((k, counter_np[k] / float(counter_g[k])) for k in counter_np if k in counter_g) #calculates nonparticipants/general, returns dict
 
-def convertPercentage(dictionary):          #converts into percentage
+def convertPercentage(dictionary):  #converts into percentage
     for key, value in dictionary.items():
         dictionary[key] = value * 100
 
@@ -59,5 +59,6 @@ def convertPercentage(dictionary):          #converts into percentage
 # print convertPercentage(success_percentage)
 # print convertPercentage(no_success_percentage)
 
-
 data_out.close()
+
+
