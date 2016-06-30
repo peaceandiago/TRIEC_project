@@ -47,9 +47,17 @@ def generalNumber(): #General number of mentees with their primary occupation
 counter_p = participated() #creates a mentee who participated/primary occupation dictionary
 counter_np = notParticipated() #creates mentee who did not participate/primary occupation dictionary
 counter_g = generalNumber() #creates general number of mentees/primary occupation dictionary
-success_percentage = dict((k, counter_p[k] / float(counter_g[k])) for k in counter_p if k in counter_g) #calculates participants/general
-for key,value in success_percentage.items():  #converts into percentage
-    success_percentage[key] = value * 100
+success_percentage = dict((k, counter_p[k] / float(counter_g[k])) for k in counter_p if k in counter_g) #calculates participants/general, returns dict
+no_success_percentage = dict((k, counter_np[k] / float(counter_g[k])) for k in counter_np if k in counter_g) #calculates nonparticipants/general, returns dict
+
+def convertPercentage(dictionary):          #converts into percentage
+    for key, value in dictionary.items():
+        dictionary[key] = value * 100
+
+    return dictionary
+
+# print convertPercentage(success_percentage)
+# print convertPercentage(no_success_percentage)
 
 
 data_out.close()
