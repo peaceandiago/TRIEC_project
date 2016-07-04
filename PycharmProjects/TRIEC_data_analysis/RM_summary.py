@@ -12,35 +12,32 @@ import datetime
 from datetime import timedelta, date
 
 
-def rejectionSummary(csv_file):#Counts the number of occurence for each rejected reason
-    file = open(csv_file, "r")
+def rejectionSummary(line_status):
+    """Counts the number of occurence for each rejected reason - returns count of rejected reasons"""
+    file = open("pastRMs.csv", "r")
     reader = csv.reader(file)
     next(reader,None)
     rej_summary = {}
     for line in reader:
-        if line[16] == 'Rejected':
+        if line_status == 'Rejected':
             rejection = line[18]
             rej_summary.setdefault(rejection, 0)
             rej_summary[rejection] += 1
 
     return rej_summary
 
-print rejectionSummary("pastRMs.csv")
+
+def dateRanges(YYYY, MM, D):
+    """compares the date ranges that are inputted with the date in the csv file - returns status"""
+    start_date = datetime.date(YYYY, MM, D)
+    end_date = datetime.date(YYYY, MM, D)
+    file = open("pastRMs.csv", "r")
+    reader = csv.reader(file)
+    next(reader, None)
+    for line in reader:
+        date = datetime.datetime.strptime(line[15], '%d/%m/%Y').date()
+        if start_date <= date <= end_date:
+            return line[18]
 
 
-for another_line in reader:
-    objectify_date_list = []
-    new = another_line[15]
-    objectify_date = datetime.datetime.strptime(new, '%d/%m/%Y').date()
-    objectify_date_list.append(objectify_date) #convert the string date into object date
-    another_line = [another_line[0:15] + objectify_date_list + another_line[16:]] #put it back to the csv file
-    for things in another_line:
-        print things[15]
 
-def perdelta(start, end, delta):
-    curr = start
-    while curr < end:
-        yield curr
-        curr += delta
-for result in perdelta(date(2011, 10, 10), date(2011, 12, 12), timedelta(days=1)):
-    print type(result)
