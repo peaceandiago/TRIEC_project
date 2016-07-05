@@ -12,12 +12,12 @@ import datetime
 from datetime import timedelta, date
 
 
-def rejectionSummary():
+def rejectionSummary(start_year, start_month, start_dates, end_year, end_month, end_dates):
     """Counts the number of occurence for each rejected reason - returns count of rejected reasons
     compares the date ranges that are inputted with the date in the csv file - returns status"""
     rej_summary = {}
-    start_date = datetime.date(2014, 04, 1)
-    end_date = datetime.date(2015, 03, 31)
+    start_date = datetime.date(start_year, start_month, start_dates)
+    end_date = datetime.date(end_year, end_month, end_dates)
     file = open("pastRMs.csv", "r")
     reader = csv.reader(file)
     next(reader, None)
@@ -30,7 +30,7 @@ def rejectionSummary():
                 rej_summary[rejection] += 1
     return rej_summary
 
-print rejectionSummary()
+print rejectionSummary(2014, 04, 1, 2015, 03, 31)
 
 
 
