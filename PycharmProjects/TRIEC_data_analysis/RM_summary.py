@@ -53,20 +53,26 @@ def statusSummary(start_year, start_month, start_dates, end_year, end_month, end
 
 reject_summary = rejectionSummary(2014, 04, 1, 2015, 03, 31)
 status_summary = statusSummary(2014, 04, 1, 2015, 03, 31)
-# overall = sum(reject_summary.values())
+print reject_summary
+print status_summary
 
 def overall(dict):
     """Add all the values from a dictionary - returns overall_numbers"""
     overall_number = sum(dict.values())
     return float(overall_number)
 
+overallreject = overall(reject_summary)
+overallstatus = overall(status_summary)
+print overallreject, overallstatus
 
-def summaryPercentage(dict):
+
+def summaryPercentage(d):
     """Divides values from dictionary for their overall then converts values from each dictionary into percentages returns
     dictionary with percentage"""
-    for key, value in dict.items():
-        dict[key] = (value/float(overall(dict))) * 100
-    return dict
+    newDict = dict()
+    for key, value in d.items():
+        newDict[key] = (value/(overall(d))) * 100
+    return newDict
 
 rejection_summary = summaryPercentage(reject_summary)
 general_status_summary = summaryPercentage(status_summary)
