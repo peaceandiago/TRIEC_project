@@ -1,4 +1,5 @@
 import csv
+import datetime
 
 def findAcceptance():
     """
@@ -14,33 +15,49 @@ def findAcceptance():
                 reports_mentors = rows[0].title()
                 reports_mentees = rows[7].title()
                 RM_date = rows[15]
-                Accepted_Cases = reports_mentors, reports_mentees, RM_date         #Put this all in one list
+                Accepted_Cases = reports_mentors, reports_mentees, RM_date
                 RM_list = list(Accepted_Cases)
                 RM.append(RM_list)
         return RM
+    RM_file.close()
 
 RM_lists = findAcceptance()
 
 def neededData():
     """
     This function takes the identified list from the findAcceptance() and compare it with another csv to get the necessary data
-    :return: Start_date, partnership_mentors, partnership_mentees, rmrows[2]
+    :return: list [Start_date, partnership_mentors, partnership_mentees, rmrows[2]]
     """
-
     with open("partnership_report.csv", "r") as PR_file:
         PR_reader = csv.reader(PR_file)
         next(PR_file, None)
+        DATA = []
         for rows in PR_reader:
             partnership_mentors = rows[2].title()
             partnership_mentees = rows[5].title()
             for rmrows in RM_lists:
                 if partnership_mentees in rmrows[1] and partnership_mentors in rmrows[0]:
-                    Start_date = rows[0]
-                return Start_date, partnership_mentors, partnership_mentees, rmrows[2]
+                    start_date = rows[0]
+                    data = start_date, partnership_mentees, partnership_mentors, rmrows[2]
+                    data_list = list(data)
+                    DATA.append(data_list)
+        return DATA
+    PR_file.close()
 
 
+data = neededData()
+# print data
 
-
+def isolateDate():
+    """
+    This function isolates the two dates that are needed and puts them into a consistent format and converts them into objects instead of string
+    :return: [start_date], [rm_date]
+    """
+    for rows in data:
+        if rows[0] and rows[1] and rows[2] and rows[3] is not None: #remove the rows with missing data
+            format_2 = '%d %m %Y'
+            start_date = datetime.datetime.strptime(rows[0], '%d-%b-%y').strftime(format_2)
+            rm_date = datetime.datetime.strptime(rows[3], '%d/%m/%Y').date().strftime(format_2)
 
 
 
