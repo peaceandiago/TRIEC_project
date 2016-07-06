@@ -56,8 +56,12 @@ def convertPercentage(dictionary):  #converts into percentage
 
     return dictionary
 
-# print convertPercentage(success_percentage)
-# print convertPercentage(no_success_percentage)
+success_percentage_converted = convertPercentage(success_percentage)
+print convertPercentage(no_success_percentage)
+
+writer = csv.writer(open("success_percentage.csv", "wb"))
+for key, value in success_percentage_converted.items():
+    writer.writerow([key, value])
 
 data_out.close()
 
