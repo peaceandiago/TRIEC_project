@@ -3,39 +3,20 @@ This program aims to clean the dataset to answer the question "Occupations of me
 """
 import csv
 from datetime import timedelta, date
+import datetime
 
-def isolateDate(csv_file): #remove time element from dataset
-    file_in = open(csv_file, "rU")
-    reader = csv.reader(file_in)
-    next(file_in,None)
-    new_date = []
-    for line in reader:
-        date = line[3]
-        date = date.split()
-        new_date.append(date[0])
-    return new_date
-
-mentee_date = isolateDate("mentees_all_attributes.csv") #all dates in the mentee csv
-
-#print mentee_date
-
-def daterange(start_date, end_date):  #create range of dates
-    for n in range(int ((end_date - start_date).days)):
-        yield start_date + timedelta(n)
-
-start_date = date(2005, 4, 1)
-end_date = date(2006, 4, 1)
-for single_date in daterange(start_date, end_date):
-    first_year = single_date
-
-    print first_year
-
-def compare(list1, list2):
-    for value in list1:
-        if value in list2:
-            return value
-
-first_fiscal_year = compare(mentee_date,first_year)
-print first_fiscal_year
+data_out = open("mentees_all_attributes.csv", "rU")
+reader = csv.reader(data_out)
+next(reader,None)
 
 
+
+start_date = datetime.date(2014, 04, 01)
+end_date = datetime.date(2015, 03, 31)
+job_count = {}
+for rows in reader:
+    date = datetime.datetime.strptime(rows[3], '%Y-%m-%d %H:%M:%S').date()
+    if start_date <= date <= end_date:
+        job_count.setdefault(rows[7], 0)
+        job_count[rows[7]] += 1
+print job_count
