@@ -75,7 +75,12 @@ def countDays():
         days_summary[rows] += 1
     return days_summary
 
-print countDays()
+DATA = countDays()
+print DATA
+
+writer = csv.writer(open("RM_StartDate_days.csv", "wb"))
+for key, value in DATA.items():
+    writer.writerow([key, value])
 
 
 #This function is to check whether two documents match - or the functions are working properly
