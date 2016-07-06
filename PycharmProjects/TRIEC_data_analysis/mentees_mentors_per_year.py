@@ -10,13 +10,22 @@ reader = csv.reader(data_out)
 next(reader,None)
 
 
+def create_dates(year):
+    start_date = datetime.date(year, 04, 01)
+    end_date = datetime.date(year, 03, 31)
+    return start_date, end_date
 
-start_date = datetime.date(2014, 04, 01)
-end_date = datetime.date(2015, 03, 31)
-job_count = {}
-for rows in reader:
-    date = datetime.datetime.strptime(rows[3], '%Y-%m-%d %H:%M:%S').date()
-    if start_date <= date <= end_date:
-        job_count.setdefault(rows[7], 0)
-        job_count[rows[7]] += 1
-print job_count
+
+
+def createJobCount():
+    """
+    Function to take start and end date and compare to file to return the occupation
+    :return: counts for each occupation for each job
+    """
+    job_count = {}
+    for rows in reader:
+        date = datetime.datetime.strptime(rows[3], '%Y-%m-%d %H:%M:%S').date()
+        if start_date <= date <= end_date:
+            job_count.setdefault(rows[7], 0)
+            job_count[rows[7]] += 1
+    print job_count
