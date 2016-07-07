@@ -57,7 +57,7 @@ def OutcomeInformation2():
     with open("MenteeOutcomeReport.csv", "r") as outcome_file:
         outcome_reader = csv.reader(outcome_file)
         next(outcome_file, None)
-        outcome1_data = []
+        outcome2_data = []
         for rows in outcome_reader:
             mentees_name = rows[0].title()
             mentees_email = rows[1].lower()
@@ -68,7 +68,7 @@ def OutcomeInformation2():
             outcome2 = mentees_name, improved_mentees_email, completion_date, mentee_outcome_2, mentee_employment_2
             outcome2_list = list(outcome2)
             outcome2_data.append(outcome2_list)
-        return outcome1_data
+        return outcome2_data
 
 def OutcomeInformation3():
     """
@@ -78,7 +78,7 @@ def OutcomeInformation3():
     with open("MenteeOutcomeReport.csv", "r") as outcome_file:
         outcome_reader = csv.reader(outcome_file)
         next(outcome_file, None)
-        outcome1_data = []
+        outcome3_data = []
         for rows in outcome_reader:
             mentees_name = rows[0].title()
             mentees_email = rows[1].lower()
@@ -89,7 +89,7 @@ def OutcomeInformation3():
             outcome3 = mentees_name, improved_mentees_email, completion_date, mentee_outcome_3, mentee_employment_3
             outcome3_list = list(outcome3)
             outcome3_data.append(outcome3_list)
-        return outcome1_data
+        return outcome3_data
 
 def OutcomeInformation4():
     """
@@ -99,7 +99,7 @@ def OutcomeInformation4():
     with open("MenteeOutcomeReport.csv", "r") as outcome_file:
         outcome_reader = csv.reader(outcome_file)
         next(outcome_file, None)
-        outcome1_data = []
+        outcome4_data = []
         for rows in outcome_reader:
             mentees_name = rows[0].title()
             mentees_email = rows[1].lower()
@@ -110,7 +110,7 @@ def OutcomeInformation4():
             outcome4 = mentees_name, improved_mentees_email, completion_date, mentee_outcome_4, mentee_employment_4
             outcome4_list = list(outcome4)
             outcome4_data.append(outcome4_list)
-        return outcome1_data
+        return outcome4_data
 
 outcome1_data = OutcomeInformation1()
 outcome2_data = OutcomeInformation2()
@@ -143,11 +143,11 @@ def CombineInformation(iterated_data, empty_list):
                 empty_list.append(necessary_data_list)
     return empty_list
 
-data1 = CombineInformation(outcome1_data,new_dataset_1)
+data1 = CombineInformation(outcome1_data, new_dataset_1)
 data2 = CombineInformation(outcome2_data, new_dataset_2)
 data3 = CombineInformation(outcome3_data, new_dataset_3)
 data4 = CombineInformation(outcome4_data, new_dataset_4)
 
-
-
-
+resultFile = open("outcomereport1.csv",'wb')
+wr = csv.writer(resultFile, dialect='excel')
+wr.writerows(data1)
