@@ -46,37 +46,37 @@ def neededData():
 
 
 data = neededData()
-# print data
+print data
 
-# def isolateDate():
-#     """
-#     This function isolates the two dates that are needed and puts them into a consistent format and converts them into objects instead of string
-#     then subtract the start date from the RM date and convert it back to the string to make it a list of strings
-#     :return: days between RM and Start_dates
-#     """
-#     DAYS = []
-#     for rows in data:
-#         if rows[0] and rows[1] and rows[2] and rows[3] is not None:  # remove the rows with missing data
-#             format_2 = '%d %m %Y'
-#             start_date = datetime.datetime.strptime(rows[0], '%d-%b-%y')
-#             rm_date = datetime.datetime.strptime(rows[3], '%d/%m/%Y')
-#             delta = start_date - rm_date
-#             number_of_days_rm_pr = delta.days
-#             numbers = str(number_of_days_rm_pr)
-#             DAYS.append(numbers)
-#     return DAYS
-#
-# DAYS = isolateDate()
-#
-# def countDays():
-#     days_summary = {}
-#     for rows in DAYS:
-#         days_summary.setdefault(rows, 0)
-#         days_summary[rows] += 1
-#     return days_summary
-#
-# DATA = countDays()
-# print DATA
+def isolateDate():
+    """
+    This function isolates the two dates that are needed and puts them into a consistent format and converts them into objects instead of string
+    then subtract the start date from the RM date and convert it back to the string to make it a list of strings
+    :return: days between RM and Start_dates
+    """
+    DAYS = []
+    for rows in data:
+        if rows[0] and rows[1] and rows[2] and rows[3] is not None:  # remove the rows with missing data
+            format_2 = '%d %m %Y'
+            start_date = datetime.datetime.strptime(rows[0], '%d-%b-%y')
+            rm_date = datetime.datetime.strptime(rows[3], '%d/%m/%Y')
+            delta = start_date - rm_date
+            number_of_days_rm_pr = delta.days
+            numbers = str(number_of_days_rm_pr)
+            DAYS.append(numbers)
+    return DAYS
+
+DAYS = isolateDate()
+
+def countDays():
+    days_summary = {}
+    for rows in DAYS:
+        days_summary.setdefault(rows, 0)
+        days_summary[rows] += 1
+    return days_summary
+
+DATA = countDays()
+print DATA
 
 
 for rows in data:
@@ -91,9 +91,9 @@ for rows in data:
 
 
 
-# writer = csv.writer(open("RM_StartDate_days.csv", "wb"))
-# for key, value in DATA.items():
-#     writer.writerow([key, value])
+writer = csv.writer(open("RM_StartDate_days.csv", "wb"))
+for key, value in DATA.items():
+    writer.writerow([key, value])
 
 
 #This function is to check whether two documents match - or the functions are working properly
