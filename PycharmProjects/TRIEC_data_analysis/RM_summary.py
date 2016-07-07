@@ -78,13 +78,13 @@ rejection_summary = summaryPercentage(reject_summary)
 general_status_summary = summaryPercentage(status_summary)
 
 
-writer = csv.writer(open("rejection_summary.csv", "wb"))
-for key, value in reject_summary.items():
-    writer.writerow([key, value])
-
-writer = csv.writer(open("general_summary.csv", "wb"))
-for key, value in general_status_summary.items():
-    writer.writerow([key, value])
+# writer = csv.writer(open("rejection_summary.csv", "wb"))
+# for key, value in reject_summary.items():
+#     writer.writerow([key, value])
+#
+# writer = csv.writer(open("general_summary.csv", "wb"))
+# for key, value in general_status_summary.items():
+#     writer.writerow([key, value])
 
 
 print rejection_summary
