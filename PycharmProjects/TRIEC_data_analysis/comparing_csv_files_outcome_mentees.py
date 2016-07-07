@@ -65,9 +65,9 @@ def OutcomeInformation2():
             completion_date = rows[3]
             mentee_outcome_2 = rows[23]
             mentee_employment_2 = rows[26]
-            outcome1 = mentees_name, improved_mentees_email, completion_date, mentee_outcome_2, mentee_employment_2
-            outcome1_list = list(outcome1)
-            outcome1_data.append(outcome1_list)
+            outcome2 = mentees_name, improved_mentees_email, completion_date, mentee_outcome_2, mentee_employment_2
+            outcome2_list = list(outcome2)
+            outcome2_data.append(outcome2_list)
         return outcome1_data
 
 def OutcomeInformation3():
@@ -86,12 +86,37 @@ def OutcomeInformation3():
             completion_date = rows[3]
             mentee_outcome_3 = rows[37]
             mentee_employment_3 = rows[40]
-            outcome1 = mentees_name, improved_mentees_email, completion_date, mentee_outcome_3, mentee_employment_3
-            outcome1_list = list(outcome1)
-            outcome1_data.append(outcome1_list)
+            outcome3 = mentees_name, improved_mentees_email, completion_date, mentee_outcome_3, mentee_employment_3
+            outcome3_list = list(outcome3)
+            outcome3_data.append(outcome3_list)
+        return outcome1_data
+
+def OutcomeInformation4():
+    """
+    This function finds and modifies the necessary information from the outcome dataset for report 4
+    :return:
+    """
+    with open("MenteeOutcomeReport.csv", "r") as outcome_file:
+        outcome_reader = csv.reader(outcome_file)
+        next(outcome_file, None)
+        outcome1_data = []
+        for rows in outcome_reader:
+            mentees_name = rows[0].title()
+            mentees_email = rows[1].lower()
+            improved_mentees_email = mentees_email.replace(' ','') #remove unwanted spaces in string present in the dataset
+            completion_date = rows[3]
+            mentee_outcome_4 = rows[51]
+            mentee_employment_4 = rows[54]
+            outcome4 = mentees_name, improved_mentees_email, completion_date, mentee_outcome_4, mentee_employment_4
+            outcome4_list = list(outcome4)
+            outcome4_data.append(outcome4_list)
         return outcome1_data
 
 outcome1_data = OutcomeInformation1()
+outcome2_data = OutcomeInformation2()
+outcome3_data = OutcomeInformation3()
+outcome4_data = OutcomeInformation4()
+
 # print outcome1_data
 
 new_dataset_1 = []
@@ -119,6 +144,10 @@ def CombineInformation(iterated_data, empty_list):
     return empty_list
 
 data1 = CombineInformation(outcome1_data,new_dataset_1)
+data2 = CombineInformation(outcome2_data, new_dataset_2)
+data3 = CombineInformation(outcome3_data, new_dataset_3)
+data4 = CombineInformation(outcome4_data, new_dataset_4)
+
 
 
 
