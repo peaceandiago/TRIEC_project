@@ -29,6 +29,10 @@ mentees_data = MenteeInformation()
 # print mentees_data
 
 def OutcomeInformation():
+    """
+
+    :return:
+    """
     with open("MenteeOutcomeReport.csv", "r") as outcome_file:
         outcome_reader = csv.reader(outcome_file)
         next(outcome_file, None)
@@ -36,6 +40,7 @@ def OutcomeInformation():
         for rows in outcome_reader:
             mentees_name = rows[0].title()
             mentees_email = rows[1].lower()
+            improved_mentees_email = mentees_email.replace(' ','') #remove unwanted spaces in string present in the dataset
             completion_date = rows[3]
             mentee_outcome_1 = rows[9]
             mentee_employment_1 = rows[12]
@@ -43,7 +48,7 @@ def OutcomeInformation():
             mentee_employment_2 = rows[26]
             mentee_outcome_3 = rows[37]
             mentee_employment_3 = rows[40]
-            outcome1 = mentees_name, mentees_email, completion_date, mentee_outcome_1, mentee_employment_1
+            outcome1 = mentees_name, improved_mentees_email, completion_date, mentee_outcome_1, mentee_employment_1
             outcome1_list = list(outcome1)
             outcome1_data.append(outcome1_list)
         return outcome1_data
@@ -53,9 +58,8 @@ outcome1_data = OutcomeInformation()
 
 for rows in mentees_data:
     for new_rows in outcome1_data:
-        print new_rows[1]
-        # if new_rows[0] in rows[0] and new_rows[1] in rows[1]:
-        #     print rows[0]
+        if new_rows[0] in rows[0] and new_rows[1] in rows[1]:
+            print rows[0]
         # print completion_date, mentee_outcome_1, mentee_employment_1
         # print completion_date, mentee_outcome_2, mentee_employment_2
         # print completion_date, mentee_outcome_3, mentee_employment_3
