@@ -119,7 +119,6 @@ def CombineInformation(iterated_data, empty_list):
     return empty_list
 
 data1 = CombineInformation(outcome1_data,new_dataset_1)
-print data1
 
 
 
