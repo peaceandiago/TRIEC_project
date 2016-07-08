@@ -186,4 +186,4 @@ with open("outcomereport1.csv", "r") as data1:
         needed_data = rows[0], rows[3]
         needed_data_list = list(needed_data)
         for new_rows in needed_data_list:
-            print new_rows
+            # print new_rows
