@@ -148,6 +148,7 @@ data2 = CombineInformation(outcome2_data, new_dataset_2)
 data3 = CombineInformation(outcome3_data, new_dataset_3)
 data4 = CombineInformation(outcome4_data, new_dataset_4)
 
-resultFile = open("outcomereport1.csv",'wb')
-wr = csv.writer(resultFile, dialect='excel')
-wr.writerows(data1)
+# resultFile = open("outcomereport1.csv",'wb')
+# wr = csv.writer(resultFile, dialect='excel')
+# wr.writerows(data1)
+
