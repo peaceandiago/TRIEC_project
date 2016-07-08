@@ -152,3 +152,38 @@ data4 = CombineInformation(outcome4_data, new_dataset_4)
 # wr = csv.writer(resultFile, dialect='excel')
 # wr.writerows(data1)
 
+"""
+This part follows up on the outcome report
+"""
+
+# general_outcome = {}
+# with open("outcomereport1.csv", "r") as data1:
+#     outcome_reader = csv.reader(data1)
+#     for rows in outcome_reader:
+#         general_outcome.setdefault(rows[2],0)
+#         general_outcome[rows[2]] += 1
+# print general_outcome
+
+# d = {'job': {'general_types': None}}
+# d['job'] ={}
+# d['general_types'] ={}
+# with open("outcomereport1.csv", "r") as data1:
+#     outcome_reader = csv.reader(data1)
+#     for rows in outcome_reader:
+#         needed_data = rows[0], rows[3]
+#         needed_data_list = list(needed_data)
+#         for new_rows in needed_data_list:
+#             print new_rows
+
+        # d['job'] = rows[0]
+        # d['general_types'].setdefault(rows[3],0)
+        # d['general_types'][rows[3]] += 1
+        # print d
+d = {}
+with open("outcomereport1.csv", "r") as data1:
+    outcome_reader = csv.reader(data1)
+    for rows in outcome_reader:
+        needed_data = rows[0], rows[3]
+        needed_data_list = list(needed_data)
+        for new_rows in needed_data_list:
+            print new_rows
