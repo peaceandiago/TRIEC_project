@@ -1,6 +1,8 @@
 import csv
 
+
 directory = "mentor"
+suffix =" question : "
 #WORKPLACE CONTACT INFORMATION
 employer_partner = {}
 job_title = {}
@@ -78,26 +80,46 @@ with open("mentor_attributes.csv", "r") as mentor_file:
         gender[rows[34]] += 1
         pins.setdefault(rows[102], 0)
         pins[rows[102]] += 1
-# print "Employer Partner: " + str(employer_partner)
-# print "How many years have you worked in your profession? " + str(years_worked_in_profession)
-# print "Name of the person at the service delivery partner who referred you: " + str(person_referred)
-# print "If your employer is not listed above, please enter the name of your workplace here " + str(not_listed_employer)
-# print "If you selected 'other' in the above, please specify your highest degree completed here: " + str(other_highest_education)
-# print "Highest level of education completed " + str(highest_education)
-# print "Please enter name of your degree and any professional license or designation " + str(degree_name)
-# print "Job Title " + str(job_title)
-# print "Please enter the name of any Professional Associations in Canada which you currently are a member of: " + str(professional_association)
-# print "Please provide a detailed description of your current / recent job role(s). " + str(detailed_job_description)
-# print "If you are a member of one of our partner associations, you may be able to claim PD credits. " + str(partner_association)
-# print "LinkedIn profile:" + str(linkedin)
-# print "Work Address" + str(work_address)
-# print "At what time of day do you prefer to meet with your mentee? " + str(time_meet_mentee)
-# print "City " + str(city)
-# print "If you were recruited directly by one of our a service delivery partners: " + str(recruited)
-# print "Where would you prefer to meet your mentee? " + str(place_meet_mentee)
-# print "Postal Code " + str(postal_code)
-# print "How did you first find out about the program? " + str(find_program)
-# print "Alternate Telephone Number" + str(alternate_telephone)
-# print "Gender" + str(gender)
-# print "If you selected Professional Immigrant Network (PINs) in the above, please enter the name of the PINs here: " + str(pins)
 
+def calculate_completed_questions(dictionary):
+    values_sum = sum(dictionary.values())
+    no_answer_dict = dict((key, value) for key, value in dictionary.items() if key == 'n/a' or key == ' ' or key == "Please Select" or key == '')
+    no_answer = sum(no_answer_dict.values())
+    percentage = (float(no_answer) / float(values_sum)) * 100
+    return round(100 - percentage, 2)
+
+
+
+WORKPLACE_CONTACT_INFORMATION = ["employer partner" + suffix + str(calculate_completed_questions(employer_partner)), "job title" + suffix + str(calculate_completed_questions(job_title)), "not listed employer" + suffix +str(calculate_completed_questions(not_listed_employer)),
+                                 "years worked in profession" + suffix + str(calculate_completed_questions(years_worked_in_profession)), "years worked in profession" + suffix + str(calculate_completed_questions(years_worked_in_profession)),
+                                 "detailed job description" + suffix + str(calculate_completed_questions(detailed_job_description)), "work address" + suffix + str(calculate_completed_questions(work_address)),
+                                 "linkedin" + suffix + str(calculate_completed_questions(linkedin)), "city" + suffix + str(calculate_completed_questions(city)), "postal code" + suffix + str(calculate_completed_questions(postal_code)),
+                                 "alternate_telephone" + suffix + str(calculate_completed_questions(alternate_telephone)), "gender" + suffix + str(calculate_completed_questions(gender))]
+
+
+EDUCATION_AND_CREDENTIALS = ["highest_education" + suffix + str(calculate_completed_questions(highest_education)), "other_highest_education" + suffix + str(calculate_completed_questions(other_highest_education)),
+                             "degree_name" + suffix + str(calculate_completed_questions(degree_name)), "partner_association" + suffix + str(calculate_completed_questions(partner_association)),
+                             "professional_association" + suffix + str(professional_association)]
+
+MEETING_PLACE_PREFERENCE = ["place_meet_mentee" + suffix + str(calculate_completed_questions(place_meet_mentee)), "time_meet_mentee" + suffix + str(calculate_completed_questions(time_meet_mentee))]
+
+RECRUITED_BY = ["find_program" + suffix + str(calculate_completed_questions(find_program)), "pins" + suffix + str(calculate_completed_questions(pins)),
+                "recruited" + suffix + str(calculate_completed_questions(recruited)), "person_referred" + suffix + str(calculate_completed_questions(person_referred))]
+
+
+def write_to_file(file_name, lists):
+    with open(file_name, 'w') as f:
+        for s in lists:
+            return f.write(s + '\n')
+
+WORKPLACE_CONTACT_INFORMATION_FILE = write_to_file("workplace.txt", WORKPLACE_CONTACT_INFORMATION)
+EDUCATION_AND_CREDENTIALS_FILE = write_to_file("educationandcredentials.txt", EDUCATION_AND_CREDENTIALS)
+MEETING_PLACE_PREFERENCE_FILE = write_to_file("meetingplacereference.txt", MEETING_PLACE_PREFERENCE)
+RECRUITED_BY_FILE = write_to_file("recruited.txt", RECRUITED_BY)
+
+
+
+print WORKPLACE_CONTACT_INFORMATION
+print EDUCATION_AND_CREDENTIALS
+print MEETING_PLACE_PREFERENCE
+print RECRUITED_BY
