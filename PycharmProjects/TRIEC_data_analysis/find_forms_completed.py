@@ -2,7 +2,7 @@ import csv
 
 
 directory = "mentor"
-suffix =" question : "
+suffix =" question "
 #WORKPLACE CONTACT INFORMATION
 employer_partner = {}
 job_title = {}
@@ -83,7 +83,7 @@ with open("mentor_attributes.csv", "r") as mentor_file:
 
 def calculate_completed_questions(dictionary):
     values_sum = sum(dictionary.values())
-    no_answer_dict = dict((key, value) for key, value in dictionary.items() if key == 'n/a' or key == ' ' or key == "Please Select" or key == '')
+    no_answer_dict = dict((key, value) for key, value in dictionary.items() if key == 'n/a' or key == ' ' or key == "Please Select" or key == '' or key == "\'\'")
     no_answer = sum(no_answer_dict.values())
     percentage = (float(no_answer) / float(values_sum)) * 100
     return round(100 - percentage, 2)
@@ -99,7 +99,7 @@ WORKPLACE_CONTACT_INFORMATION = ["employer partner" + suffix + str(calculate_com
 
 EDUCATION_AND_CREDENTIALS = ["highest_education" + suffix + str(calculate_completed_questions(highest_education)), "other_highest_education" + suffix + str(calculate_completed_questions(other_highest_education)),
                              "degree_name" + suffix + str(calculate_completed_questions(degree_name)), "partner_association" + suffix + str(calculate_completed_questions(partner_association)),
-                             "professional_association" + suffix + str(professional_association)]
+                             "professional_association" + suffix + str(calculate_completed_questions(professional_association))]
 
 MEETING_PLACE_PREFERENCE = ["place_meet_mentee" + suffix + str(calculate_completed_questions(place_meet_mentee)), "time_meet_mentee" + suffix + str(calculate_completed_questions(time_meet_mentee))]
 
@@ -107,19 +107,12 @@ RECRUITED_BY = ["find_program" + suffix + str(calculate_completed_questions(find
                 "recruited" + suffix + str(calculate_completed_questions(recruited)), "person_referred" + suffix + str(calculate_completed_questions(person_referred))]
 
 
-def write_to_file(file_name, lists):
-    with open(file_name, 'w') as f:
-        for s in lists:
-            return f.write(s + '\n')
-
-WORKPLACE_CONTACT_INFORMATION_FILE = write_to_file("workplace.txt", WORKPLACE_CONTACT_INFORMATION)
-EDUCATION_AND_CREDENTIALS_FILE = write_to_file("educationandcredentials.txt", EDUCATION_AND_CREDENTIALS)
-MEETING_PLACE_PREFERENCE_FILE = write_to_file("meetingplacereference.txt", MEETING_PLACE_PREFERENCE)
-RECRUITED_BY_FILE = write_to_file("recruited.txt", RECRUITED_BY)
-
-
 
 print WORKPLACE_CONTACT_INFORMATION
 print EDUCATION_AND_CREDENTIALS
 print MEETING_PLACE_PREFERENCE
 print RECRUITED_BY
+
+# myfile = open("workplace.csv", 'wb')
+# wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+# wr.writerow(RECRUITED_BY)
