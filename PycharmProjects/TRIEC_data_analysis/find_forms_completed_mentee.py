@@ -157,12 +157,10 @@ with open("mentees_all_attributes.csv", "r") as mentee_file:
 def calculate_completed_questions(dictionary):
     new_dict = dict((key, value) for key, value in dictionary.iteritems())
     new_dict = sum(new_dict.values())
-    print new_dict
     nu_dict = dict((key, value) for key, value in dictionary.iteritems() if key == 'n/a' or key == ' ' or key == "Please Select" or key == '' or key == "\'\'")
     nu_dict = sum(nu_dict.values())
-    print nu_dict
     percentage = (float(nu_dict) / float(new_dict)) * 100
-    return round(percentage, 2)
+    return round(100 - percentage, 2)
 
 CONTACT_INFORMATION = {}
 CONTACT_INFORMATION['address'] = calculate_completed_questions(address)
@@ -176,49 +174,55 @@ PERSONAL_INFORMATION['date of birth'] = calculate_completed_questions(date_of_bi
 PERSONAL_INFORMATION['country of origin'] = calculate_completed_questions(country_of_origin)
 PERSONAL_INFORMATION['languages spoken'] = calculate_completed_questions(languages_spoken)
 PROGRAM_ELIGIBILITY = {}
-# immigration_status = {}
-# other_immigration_status = {}
-# date_of_arrival = {}
-# job_search= {}
-# yes_select_program = {}
-# employed_underemployed = {}
-# occupation_specific_program = {}
-# language_assessment = {}
-# score_level_assessment = {}
-# occupation_related_education = {}
-# services_resouces_find_employment = {}
-# not_listed_services_resources = {}
-# years_of_work_experience = {}
+PROGRAM_ELIGIBILITY['immigration status'] = calculate_completed_questions(immigration_status)
+PROGRAM_ELIGIBILITY['If your immigration status is not listed above, please enter your immigration status here:'] = calculate_completed_questions(other_immigration_status)
+PROGRAM_ELIGIBILITY['Date of Arrival'] = calculate_completed_questions(date_of_arrival)
+PROGRAM_ELIGIBILITY['Have you completed any job search or employment preparation programs?'] = calculate_completed_questions(job_search)
+PROGRAM_ELIGIBILITY['If yes, please select the programs you completed (Press CTRL + click to multi-select):'] = calculate_completed_questions(yes_select_program)
+PROGRAM_ELIGIBILITY['Are you currently unemployed or underemployed i.e. not working in your field of expertise?	'] = calculate_completed_questions(employed_underemployed)
+PROGRAM_ELIGIBILITY['If you completed an occupation-specific program for your professional field with duration of 1 week'] = calculate_completed_questions(occupation_specific_program)
+PROGRAM_ELIGIBILITY['If you have taken the CLB, IELTS or other language assessment'] = calculate_completed_questions(language_assessment)
+PROGRAM_ELIGIBILITY['What score or level did you achieve on this assessment'] = calculate_completed_questions(score_level_assessment)
+PROGRAM_ELIGIBILITY['If you are currently enrolled in an occupation-related educational or upgrading course/program'] = calculate_completed_questions(occupation_related_education)
+PROGRAM_ELIGIBILITY['What services or resources have you used to help you find employment or to support you to integrate into the Canadian workplace? '] = calculate_completed_questions(services_resouces_find_employment)
+PROGRAM_ELIGIBILITY['If the services or resources you used is not listed above'] = calculate_completed_questions(not_listed_services_resources)
+PROGRAM_ELIGIBILITY['How many years of work experience do you have in your profession?'] = calculate_completed_questions(years_of_work_experience)
 EDUCATION_PROFESSIONAL_CREDENTIALS = {}
-# highest_level_education = {}
-# country_level_education= {}
-# professional_association = {}
-# outside_canada_professional_association = {}
+EDUCATION_PROFESSIONAL_CREDENTIALS['Highest level of education'] = calculate_completed_questions(highest_level_education)
+EDUCATION_PROFESSIONAL_CREDENTIALS['The country in which you attained your highest level of education:'] = calculate_completed_questions(country_level_education)
+EDUCATION_PROFESSIONAL_CREDENTIALS['Please enter any Professional Associations in Canada '] = calculate_completed_questions(professional_association)
+EDUCATION_PROFESSIONAL_CREDENTIALS['Please enter any Professional Associations in Canada outside_canada'] = calculate_completed_questions(outside_canada_professional_association)
 REGULATED_PROFESSIONS = {}
-# profession_regulated = {}
-# pursue_planning_license = {}
-# licensure_pursuing = {}
-# licensure_pursuing_not_listed = {}
-# far_in_process = {}
+REGULATED_PROFESSIONS['Is your profession regulated in Canada?'] = calculate_completed_questions(profession_regulated)
+REGULATED_PROFESSIONS['If yes, are you pursuing or planning to pursue your licensure in Canada?'] = calculate_completed_questions(pursue_planning_license)
+REGULATED_PROFESSIONS['If yes, which licensure are you pursuing?'] = calculate_completed_questions(licensure_pursuing)
+REGULATED_PROFESSIONS['If the licensure you are pursuing is not listed'] = calculate_completed_questions(licensure_pursuing_not_listed)
+REGULATED_PROFESSIONS['If yes, how far into the process are you now at?'] = calculate_completed_questions(far_in_process)
 BRIDGE_TRANING_PROGRAM = {}
-# bridge_traning_program = {}
-# date_registration_bridge = {}
-# name_program_participated = {}
-# bridge_program_not_listed = {}
-# length_of_program = {}
-# pursuing_education_skills = {}
+BRIDGE_TRANING_PROGRAM['Are you currently registered or have you completed a Bridge Training Program?'] = calculate_completed_questions(bridge_traning_program)
+BRIDGE_TRANING_PROGRAM['When did you register/complete the program?'] = calculate_completed_questions(date_registration_bridge)
+BRIDGE_TRANING_PROGRAM['Please give the name(s) of program or programs you have participated in?'] = calculate_completed_questions(name_program_participated)
+BRIDGE_TRANING_PROGRAM['If your Bridge programs is not listed above, please enter it here:'] = calculate_completed_questions(bridge_program_not_listed)
+BRIDGE_TRANING_PROGRAM['What was the length of the bridge program?'] = calculate_completed_questions(length_of_program)
+BRIDGE_TRANING_PROGRAM['Have you pursued or are you currently pursuing any education or skills upgrading courses?'] = calculate_completed_questions(pursuing_education_skills)
 HISTORY_GOALS = {}
-# years_worked_before_Canada = {}
-# last_job_before_Canada = {}
-# length_of_time = {}
-# short_term_goals = {}
-# long_term_goals = {}
+HISTORY_GOALS['How many years did you work in your profession before coming to Canada?'] = calculate_completed_questions(years_worked_before_Canada)
+HISTORY_GOALS['What was your last job title before immigrating to Canada?'] = calculate_completed_questions(last_job_before_Canada)
+HISTORY_GOALS['What is the length of the time you have been in Canada and not practicing in your occupation?'] = calculate_completed_questions(length_of_time)
+HISTORY_GOALS['Short term goals'] = calculate_completed_questions(short_term_goals)
+HISTORY_GOALS['Long term goals'] = calculate_completed_questions(long_term_goals)
 EMPLOYMENT_STATUS = {}
-# income_security_benefits = {}
-# employed_within_field = {}
-# level_last_employment = {}
-# period_of_time = {}
-# current_job_title = {}
-# approximate_earnings = {}
+EMPLOYMENT_STATUS['Are you currently receiving income security benefits?'] = calculate_completed_questions(income_security_benefits)
+EMPLOYMENT_STATUS['Are you employed within your field of expertise or a related field?'] = calculate_completed_questions(employed_within_field)
+EMPLOYMENT_STATUS['Do you feel you are employed at a level that is equivalent to your last employment before arrival in Canada?'] = calculate_completed_questions(level_last_employment)
+EMPLOYMENT_STATUS['What period of time is your current employment contract:'] = calculate_completed_questions(period_of_time)
+EMPLOYMENT_STATUS['Current job title'] = calculate_completed_questions(current_job_title)
+EMPLOYMENT_STATUS['What is your approximate gross annual earnings before tax'] = calculate_completed_questions(approximate_earnings)
 print CONTACT_INFORMATION
 print PERSONAL_INFORMATION
+print PROGRAM_ELIGIBILITY
+print EDUCATION_PROFESSIONAL_CREDENTIALS
+print REGULATED_PROFESSIONS
+print BRIDGE_TRANING_PROGRAM
+print HISTORY_GOALS
+print EMPLOYMENT_STATUS
