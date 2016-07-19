@@ -90,23 +90,6 @@ def calculate_completed_questions(dictionary):
 
 
 
-WORKPLACE_CONTACT_INFORMATION = ["employer partner" + suffix + str(calculate_completed_questions(employer_partner)), "job title" + suffix + str(calculate_completed_questions(job_title)), "not listed employer" + suffix +str(calculate_completed_questions(not_listed_employer)),
-                                 "years worked in profession" + suffix + str(calculate_completed_questions(years_worked_in_profession)), "years worked in profession" + suffix + str(calculate_completed_questions(years_worked_in_profession)),
-                                 "detailed job description" + suffix + str(calculate_completed_questions(detailed_job_description)), "work address" + suffix + str(calculate_completed_questions(work_address)),
-                                 "linkedin" + suffix + str(calculate_completed_questions(linkedin)), "city" + suffix + str(calculate_completed_questions(city)), "postal code" + suffix + str(calculate_completed_questions(postal_code)),
-                                 "alternate_telephone" + suffix + str(calculate_completed_questions(alternate_telephone)), "gender" + suffix + str(calculate_completed_questions(gender))]
-
-
-EDUCATION_AND_CREDENTIALS = ["highest_education" + suffix + str(calculate_completed_questions(highest_education)), "other_highest_education" + suffix + str(calculate_completed_questions(other_highest_education)),
-                             "degree_name" + suffix + str(calculate_completed_questions(degree_name)), "partner_association" + suffix + str(calculate_completed_questions(partner_association)),
-                             "professional_association" + suffix + str(calculate_completed_questions(professional_association))]
-
-MEETING_PLACE_PREFERENCE = ["place_meet_mentee" + suffix + str(calculate_completed_questions(place_meet_mentee)), "time_meet_mentee" + suffix + str(calculate_completed_questions(time_meet_mentee))]
-
-RECRUITED_BY = ["find_program" + suffix + str(calculate_completed_questions(find_program)), "pins" + suffix + str(calculate_completed_questions(pins)),
-                "recruited" + suffix + str(calculate_completed_questions(recruited)), "person_referred" + suffix + str(calculate_completed_questions(person_referred))]
-
-
 
 print WORKPLACE_CONTACT_INFORMATION
 print EDUCATION_AND_CREDENTIALS

@@ -1,5 +1,6 @@
 import csv
 import datetime
+import pickle
 from collections import Counter
 from itertools import izip_longest
 
@@ -58,7 +59,7 @@ with open("mentees_all_attributes.csv", "r") as mentee_file:
     menteer_reader = csv.reader(mentee_file)
     next(mentee_file, None)
     start_date = datetime.date(2013, 04, 1)
-    end_date = datetime.date(2016, 03, 31)
+    end_date = datetime.date(2014, 03, 31)
     for rows in menteer_reader:
         date = datetime.datetime.strptime(rows[3], '%Y-%m-%d %H:%M:%S').date()
         if start_date <= date <= end_date:
@@ -231,3 +232,10 @@ print REGULATED_PROFESSIONS
 print BRIDGE_TRANING_PROGRAM
 print HISTORY_GOALS
 print EMPLOYMENT_STATUS
+
+all_content = dict(CONTACT_INFORMATION.items() + PERSONAL_INFORMATION.items() + PROGRAM_ELIGIBILITY.items() + EDUCATION_PROFESSIONAL_CREDENTIALS.items() + REGULATED_PROFESSIONS.items() + BRIDGE_TRANING_PROGRAM.items() + HISTORY_GOALS.items() + EMPLOYMENT_STATUS.items())
+print all_content
+
+w = csv.writer(open("mentee_form.csv", "w"))
+for key, val in all_content.items():
+    w.writerow([key, val])
