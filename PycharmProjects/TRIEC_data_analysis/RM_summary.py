@@ -51,8 +51,8 @@ def statusSummary(start_year, start_month, start_dates, end_year, end_month, end
     return overall_summary
 
 
-reject_summary = rejectionSummary(2013, 04, 1, 2016, 03, 31)
-status_summary = statusSummary(2013, 04, 1, 2016, 03, 31)
+reject_summary = rejectionSummary(2012, 04, 1, 2015, 03, 31)
+status_summary = statusSummary(2012, 04, 1, 2015, 03, 31)
 print reject_summary
 print status_summary
 
@@ -71,20 +71,20 @@ def summaryPercentage(d):
     dictionary with percentage"""
     newDict = dict()
     for key, value in d.items():
-        newDict[key] = (value/(overall(d))) * 100
+        newDict[key] = round((value/(overall(d))) * 100, 2)
     return newDict
 
 rejection_summary = summaryPercentage(reject_summary)
 general_status_summary = summaryPercentage(status_summary)
 
 
-# writer = csv.writer(open("rejection_summary.csv", "wb"))
-# for key, value in reject_summary.items():
-#     writer.writerow([key, value])
-#
-# writer = csv.writer(open("general_summary.csv", "wb"))
-# for key, value in general_status_summary.items():
-#     writer.writerow([key, value])
+writer = csv.writer(open("rejection_summary.csv", "wb"))
+for key, value in rejection_summary.items():
+    writer.writerow([key, value])
+
+writer = csv.writer(open("general_summary.csv", "wb"))
+for key, value in general_status_summary.items():
+    writer.writerow([key, value])
 
 
 print rejection_summary
