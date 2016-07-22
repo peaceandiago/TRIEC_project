@@ -43,19 +43,6 @@ w = csv.writer(open("rejection_characters.csv", "w"))
 for key, val in mentor_industry.items():
     w.writerow([key, val])
 
-
-# coding=utf-8
-"""
-Author: Paola Santiago
-
-This program follows through exploring the cause of no response for mentors/mentees – look at the 16% no response for mentees and mentors
-(no response and not available)
-
-"""
-import csv
-import datetime
-
-
 first_sample = [] #Recommended Matches
 input_file= open("pastRMs.csv", "r")
 match_readers = csv.reader(input_file)
