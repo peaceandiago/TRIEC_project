@@ -95,3 +95,35 @@ for key, value in days_summary.items():
     writer.writerow([key, value])
 
 
+same_occupation_counts = {}
+different_occupation_counts = {}
+same_industry_counts = {}
+different_industry_counts = {}
+
+input_file= open("pastRMs.csv", "r")
+match_readers = csv.reader(input_file)
+next(input_file, None)
+start_date = datetime.date(2012, 04, 1)
+end_date = datetime.date(2016, 03, 31)
+for rows in match_readers:
+    date = datetime.datetime.strptime(rows[15], '%d/%m/%Y').date()
+    # if rows[16] == "Accepted" and start_date <= date <= end_date:
+    if rows[18] == "Incompatibility of industry" and start_date <= date <= end_date:
+        if rows[5] == rows[11]:
+            # same_occupation = rows[3], rows[9] #MENTOR NOC, MENTEE NOC
+            # same_occupation_counts.setdefault(same_occupation, 0)
+            # same_occupation_counts[same_occupation] += 1
+            same_industry = rows[5], rows[11] #MENTOR NAIC, MENTEE NAIC
+            same_industry_counts.setdefault(same_industry,0)
+            same_industry_counts[same_industry] += 1
+        if rows[5] != rows[11]:
+            # different_occupation = rows[3], rows[9]
+            # different_occupation_counts.setdefault(different_occupation, 0)
+            # different_occupation_counts[different_occupation] += 1
+            different_industry = rows[5], rows[11] #MENTOR NAIC, MENTEE NAIC
+            different_industry_counts.setdefault(different_industry,0)
+            different_industry_counts[different_industry] += 1
+
+w = csv.writer(open("rejection_characters.csv", "w"))
+for key, val in different_industry_counts.items():
+    w.writerow([key, val])
