@@ -32,11 +32,11 @@ recruited = {}
 person_referred = {}
 
 
-with open("all_mentor_attributes.csv", "r") as mentor_file:
+with open("new_mentor_attributes.csv", "r") as mentor_file:
     mentor_reader = csv.reader(mentor_file)
     next(mentor_file, None)
-    start_date = datetime.date(2009, 04, 1)
-    end_date = datetime.date(2012, 03, 31)
+    start_date = datetime.date(2012, 04, 1)
+    end_date = datetime.date(2016, 03, 31)
     for rows in mentor_reader:
         date = datetime.datetime.strptime(rows[3], '%m/%d/%Y').date()
         if start_date <= date <= end_date:
